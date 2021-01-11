@@ -3,10 +3,10 @@
 namespace App\Pages;
 
 use Sideapps\LaravelPages\Breadcrumb\Breadcrumb;
-use Sideapps\LaravelPages\Pages\BaseStaticPage;
+use Sideapps\LaravelPages\Pages\StaticPage;
 use Sideapps\LaravelPages\Pages\Page;
 
-class CLASS_NAME extends BaseStaticPage implements Page {
+class CLASS_NAME extends StaticPage implements Page {
 
     protected static string $translation_key = '';
 

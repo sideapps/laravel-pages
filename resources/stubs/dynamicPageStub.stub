@@ -3,10 +3,10 @@
 namespace App\Pages;
 
 use Sideapps\LaravelPages\Breadcrumb\Breadcrumb;
-use Sideapps\LaravelPages\Pages\BaseDynamicPage;
+use Sideapps\LaravelPages\Pages\DynamicPage;
 use Sideapps\LaravelPages\Pages\Page;
 
-class CLASS_NAME extends BaseDynamicPage implements Page {
+class CLASS_NAME extends DynamicPage implements Page {
 
     protected static string $route = '';
 
