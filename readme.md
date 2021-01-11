@@ -11,7 +11,11 @@ Works with joedixon/laravel-translation & spatie/laravel-translatable
 
 ## Installation
 
-You can install package via composer.json
+``` bash
+composer require sideapps/laravel-pages
+```
+
+or
 
 ``` json
 ...
