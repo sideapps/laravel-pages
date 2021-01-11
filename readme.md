@@ -18,19 +18,9 @@ composer require sideapps/laravel-pages
 or
 
 ``` json
-...
 "require": {
-    ...
-    "sideapps/laravel-pages": "^1.0.2"
+    "sideapps/laravel-pages": "^1.0.4"
 },
-...
-"repositories": [
-    ...
-    {
-        "type": "vcs",
-        "url": "https://github.com/julien-culieras/laravel-pages"
-    }
-]
 ```
 
 ## Usage
@@ -177,4 +167,10 @@ You now have a $page variable in all your blade views. You can also use it in la
 </body>
 
 </html>
+```
+
+## Publish config & views files
+
+``` bash
+php artisan vendor:publish --provider="Sideapps\LaravelPages\LaravelPagesServiceProvider"
 ```
