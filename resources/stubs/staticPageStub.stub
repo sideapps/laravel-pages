@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Pages;
+
+use Sideapps\LaravelPages\Breadcrumb\Breadcrumb;
+use Sideapps\LaravelPages\Pages\BaseStaticPage;
+use Sideapps\LaravelPages\Pages\Page;
+
+class CLASS_NAME extends BaseStaticPage implements Page {
+
+    protected static string $translation_key = '';
+
+    protected static string $route = '';
+
+    public function getBreadcrumb():?Breadcrumb {
+        return new Breadcrumb([
+            $this->createPageFactory->getPage(HomePage::class)->getBreadcrumbItem(),
+            $this->getBreadcrumbItem(false)
+        ]);
+    }
+
+}

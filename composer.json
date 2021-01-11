@@ -1,0 +1,26 @@
+{
+    "name": "sideapps/laravel-pages",
+    "description": "Dynamic & static page class for Laravel Eloquent models",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "SIDEAPPS",
+            "email": "contact@sideapps.fr"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.4",
+        "joedixon/laravel-translation": "^1.1",
+        "laravel/framework": "^8.12",
+        "spatie/laravel-translatable": "^4.6"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sideapps\\LaravelPages\\LaravelPagesServiceProvider"
+            ]
+        }
+    }
+}
