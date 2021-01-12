@@ -24,6 +24,8 @@ interface Page {
 
     public function generateBreadcrumb():View;
 
+    public function generateMetaIndex():?View;
+
     public function getMetaTitle():string;
 
     public function getMetaDescription():?string;

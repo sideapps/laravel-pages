@@ -12,6 +12,8 @@ abstract class BasePage {
 
     protected CreatePageFactory $createPageFactory;
 
+    protected static bool $metaIndex = true;
+
     public function __construct() {
         $this->createPageFactory = resolve(CreatePageFactory::class);
     }
@@ -35,6 +37,13 @@ abstract class BasePage {
     public function generateAlternateLinks():View {
         $urls = $this->getAlternatesUrls();
         return view('laravelPage::alternatesUrls', compact('urls'));
+    }
+
+    public function generateMetaIndex():?View {
+        if (!static::$metaIndex) {
+            return view('laravelPage::metaNoIndex');
+        }
+        return null;
     }
 
     public function generateSwitchLanguageLinks():View {

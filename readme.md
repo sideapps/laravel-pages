@@ -169,6 +169,21 @@ You now have a $page variable in all your blade views. You can also use it in la
 </html>
 ```
 
+## Options
+
+### no index, no follow
+
+``` php
+protected static bool $metaIndex = false;
+```
+Add this line to your page class
+
+``` php
+{!! $page->generateMetaIndex() !!}
+```
+And this to your blade head section template
+
+
 ## Publish config & views files
 
 ``` bash

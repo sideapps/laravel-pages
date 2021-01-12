@@ -12,6 +12,8 @@ class CLASS_NAME extends DynamicPage implements Page {
 
     protected static array $routeParams = [];
 
+    protected static bool $metaIndex = true;
+
     public function getBreadcrumb():?Breadcrumb {
         return new Breadcrumb([
             $this->createPageFactory->getPage(HomePage::class)->getBreadcrumbItem(),

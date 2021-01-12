@@ -12,6 +12,8 @@ class CLASS_NAME extends StaticPage implements Page {
 
     protected static string $route = '';
 
+    protected static bool $metaIndex = true;
+
     public function getBreadcrumb():?Breadcrumb {
         return new Breadcrumb([
             $this->createPageFactory->getPage(HomePage::class)->getBreadcrumbItem(),
