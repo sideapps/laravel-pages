@@ -3,9 +3,7 @@
 
 namespace Sideapps\LaravelPages\Pages;
 
-abstract class StaticPage extends BasePage{
-
-    protected static string $translation_key;
+abstract class StaticPage extends BasePage {
 
     protected static string $metaTitleKey;
 

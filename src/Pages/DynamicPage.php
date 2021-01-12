@@ -6,7 +6,7 @@ namespace Sideapps\LaravelPages\Pages;
 
 use Illuminate\Support\Str;
 
-abstract class DynamicPage extends BasePage{
+abstract class DynamicPage extends BasePage {
 
     protected static string $route;
 

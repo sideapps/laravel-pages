@@ -36,4 +36,8 @@ interface Page {
 
     public function getBreadcrumbItem(bool $withUrl = true):BreadcrumbItem;
 
+    public function trans(string $key):?string;
+
+    public function getLangAttribute():string;
+
 }

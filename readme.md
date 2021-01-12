@@ -94,6 +94,8 @@ use Sideapps\LaravelPages\Pages\Page;
 
 class PostPage extends DynamicPage implements Page {
 
+    protected static string $translation_key = 'post_page';
+
     protected static string $route = 'posts.show';
 
     protected static array $routeParams = ['slug'];
@@ -152,11 +154,12 @@ You now have a $page variable in all your blade views. You can also use it in la
 
 ``` php
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ $page->getLangAttribute() }}">
 
 <head>
-    <title>{{ $page->getMetaTitle() }} - Sex With Me</title>
+    <title>{{ $page->getMetaTitle() }} - Site Name</title>
     <meta name="description" content="{{ $page->getMetaDescription() }}">
+    {!! $page->generateMetaIndex() !!}
     {!! $page->generateAlternateLinks() !!}
 </head>
 
@@ -178,11 +181,47 @@ protected static bool $metaIndex = false;
 ```
 Add this line to your page class
 
-``` php
-{!! $page->generateMetaIndex() !!}
-```
-And this to your blade head section template
+## Methods available in views
 
+##### Get translation :
+``` php
+{{ $page->trans('paragraph1') }}
+```
+
+##### Get lang attribute :
+``` php
+{{ $page->getLangAttribute() }}
+```
+
+##### get meta-title :
+``` php
+{{ $page->getMetaTitle() }}
+```
+
+##### get meta-description :
+``` php
+{{ $page->getMetaDescription() }}
+```
+
+##### Generate no index meta (generate meta noindex, nofollow if page is noindex) :
+``` php
+{{ $page->generateMetaIndex() }}
+```
+
+##### Generate alternate links :
+``` php
+{{ $page->generateAlternateLinks() }}
+```
+
+##### Generate switch languages links :
+``` php
+{{ $page->generateSwitchLanguageLinks() }}
+```
+
+##### Generate breadcrumb :
+``` php
+{{ $page->generateBreadcrumb() }}
+```
 
 ## Publish config & views files
 

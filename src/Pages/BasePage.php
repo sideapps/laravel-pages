@@ -8,9 +8,11 @@ use JoeDixon\Translation\Drivers\Translation;
 use Sideapps\LaravelPages\Breadcrumb\Breadcrumb;
 use Sideapps\LaravelPages\Breadcrumb\BreadcrumbItem;
 
-abstract class BasePage {
+abstract class BasePage implements Page {
 
     protected CreatePageFactory $createPageFactory;
+
+    protected static string $translation_key;
 
     protected static bool $metaIndex = true;
 
@@ -62,6 +64,15 @@ abstract class BasePage {
 
     public function getBreadcrumbItem(bool $withUrl = true): BreadcrumbItem {
         return new BreadcrumbItem($this->getBreadcrumbAnchor(), $withUrl ? $this->getUrl() : null);
+    }
+
+    public function trans(string $key, ?string $locale = null):?string {
+        if (!$locale) $locale = app()->getLocale();
+        return trans(static::$translation_key . '.' . $key, [], $locale);
+    }
+
+    public function getLangAttribute(): string {
+        return str_replace('_', '-', app()->getLocale());
     }
 
 }
