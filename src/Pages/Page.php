@@ -40,4 +40,6 @@ interface Page {
 
     public function getLangAttribute():string;
 
+    public function render(array $vars = []):View;
+
 }

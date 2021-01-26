@@ -14,6 +14,8 @@ abstract class BasePage implements Page {
 
     protected static string $translation_key;
 
+    protected static string $view;
+
     protected static bool $metaIndex = true;
 
     public function __construct() {
@@ -73,6 +75,11 @@ abstract class BasePage implements Page {
 
     public function getLangAttribute(): string {
         return str_replace('_', '-', app()->getLocale());
+    }
+
+    public function render(array $vars = []):View {
+        $vars['page'] = $this;
+        return \view(static::$view, $vars);
     }
 
 }
