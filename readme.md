@@ -106,7 +106,7 @@ class PostPage extends DynamicPage implements Page {
         return [
             'slug' // Same as 'slug' => 'slug' (get $this->model->slug value)
             'slugBis' => 'slug' // (get $this->model->slug value) for slubBis route parameter
-            'slugBisBis' => function(return $this->model->slug;) // Specify value with closure
+            'slugBisBis' => function() {return $this->model->slug;} // Specify value with closure
         ];
     }
 
