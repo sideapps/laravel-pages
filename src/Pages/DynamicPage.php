@@ -6,11 +6,9 @@ namespace Sideapps\LaravelPages\Pages;
 
 use Illuminate\Support\Str;
 
-abstract class DynamicPage extends BasePage {
+abstract class DynamicPage extends BasePage implements DynamicPageInterface {
 
     protected static string $route;
-
-    protected static array $routeParams;
 
     protected Pageable $model;
 
@@ -65,7 +63,13 @@ abstract class DynamicPage extends BasePage {
     public function getUrl(?string $locale = null): string {
         if (!$locale) $locale = app()->getLocale();
         $params = ['locale' => $locale];
-        foreach (static::$routeParams as $routeParam) $params[$routeParam] = $this->model->getTranslation($routeParam, $locale);
+        foreach ($this->routeParams() as $key => $routeParam) {
+            if (is_numeric($key) && is_string($routeParam)) $params[$routeParam] = $this->model->getTranslation($routeParam, $locale);
+            elseif (is_string($key) && is_string($routeParam)) $params[$key] = $this->model->getTranslation($routeParam, $locale);
+            elseif (is_string($key) && is_callable($routeParam)) {
+                $params[$key] = call_user_func($routeParam);
+            }
+        }
         return route(static::$route, $params);
     }
 

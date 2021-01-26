@@ -44,6 +44,8 @@ class TestStaticPage extends StaticPage implements Page {
 
     protected static string $route = 'test';
 
+    protected static string $view = 'static.test';
+
     public function getBreadcrumb():?Breadcrumb {
         return new Breadcrumb([
             $this->getBreadcrumbItem(false) // set false for not clickable anchor
@@ -64,7 +66,7 @@ class StaticPageController extends Controller {
 
     public function test() {
         $page = $this->createPageFactory->getPage(TestStaticPage::class);
-        return view('static.test', compact('page'));
+        return $page->render();
     }
 
     ...
@@ -98,7 +100,15 @@ class PostPage extends DynamicPage implements Page {
 
     protected static string $route = 'posts.show';
 
-    protected static array $routeParams = ['slug'];
+    protected static string $view = 'posts.show';
+
+    public function routeParams():array {
+        return [
+            'slug' // Same as 'slug' => 'slug' (get $this->model->slug value)
+            'slugBis' => 'slug' // (get $this->model->slug value) for slubBis route parameter
+            'slugBisBis' => function(return $this->model->slug;) // Specify value with closure
+        ];
+    }
 
     public function getBreadcrumb():?Breadcrumb {
         return new Breadcrumb([
@@ -134,7 +144,7 @@ class PostController extends Controller {
     public function show(string $locale, string $slug) {
         $post = $this->postRepository->findBySlug($slug);
         $page = $post->getPage();
-        return view('categoryCity.show', compact('post', 'page'));
+        return $page->render(compact($post));
     }
 
 }
