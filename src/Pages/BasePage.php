@@ -20,16 +20,18 @@ abstract class BasePage implements Page {
 
     protected bool $useRestrictLocales = false;
 
-    protected array $restrictLocales = [];
-
     public function __construct() {
         $this->createPageFactory = resolve(CreatePageFactory::class);
+    }
+
+    public function restrictLocales(): array {
+        return [];
     }
 
     public function getAllAlternatesUrls():array {
         /** @var Translation $translations */
         $translations = resolve(Translation::class);
-        if ($this->useRestrictLocales) $locales = $this->restrictLocales;
+        if ($this->useRestrictLocales) $locales = $this->restrictLocales();
         else $locales = $translations->allLanguages()->keys();
 
         $urls = [];

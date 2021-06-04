@@ -12,6 +12,8 @@ interface Page {
 
     public function getUrl(?string $locale = null):string;
 
+    public function restrictLocales():array;
+
     public function getAllAlternatesUrls():array;
 
     public function getAlternatesUrls():array;
