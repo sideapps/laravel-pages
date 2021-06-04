@@ -18,6 +18,10 @@ abstract class BasePage implements Page {
 
     protected static bool $metaIndex = true;
 
+    protected bool $useRestrictLocales = false;
+
+    protected array $restrictLocales = [];
+
     public function __construct() {
         $this->createPageFactory = resolve(CreatePageFactory::class);
     }
@@ -25,17 +29,26 @@ abstract class BasePage implements Page {
     public function getAllAlternatesUrls():array {
         /** @var Translation $translations */
         $translations = resolve(Translation::class);
-        $array = [];
-        foreach ($translations->allLanguages()->keys() as $locale) {
-            $array[$locale] = $this->getUrl($locale);
+        if ($this->useRestrictLocales) $locales = $this->restrictLocales;
+        else $locales = $translations->allLanguages()->keys();
+
+        $urls = [];
+        if (count($locales) > 0) {
+            foreach ($locales as $locale) {
+                $urls[$locale] = $this->getUrl($locale);
+            }
         }
-        return $array;
+        return $urls;
     }
 
     public function getAlternatesUrls():array {
-        return array_filter($this->getAllAlternatesUrls(), function (string $url, string $locale) {
-            return app()->getLocale() !== $locale;
-        }, ARRAY_FILTER_USE_BOTH);
+        $urls = $this->getAllAlternatesUrls();
+        if (count($urls) > 0) {
+            return array_filter($urls, function (string $url, string $locale) {
+                return app()->getLocale() !== $locale;
+            }, ARRAY_FILTER_USE_BOTH);
+        }
+        return [];
     }
 
     public function generateAlternateLinks():View {
